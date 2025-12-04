@@ -1,0 +1,67 @@
+[gd_scene load_steps=11 format=3 uid="uid://bmwy45ibgeaom"]
+
+[ext_resource type="Script" uid="uid://cc6bd8hfflaq3" path="res://RTS_Camera_.gd" id="1_f3sb7"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gv5m4"]
+sky_top_color = Color(0.7830338, 0.8811694, 0.99145025, 1)
+sky_horizon_color = Color(1.1133878, 1.1301718, 1.148742, 1)
+ground_horizon_color = Color(1.1133878, 1.1301718, 1.148742, 1)
+
+[sub_resource type="Sky" id="Sky_f3sb7"]
+sky_material = SubResource("ProceduralSkyMaterial_gv5m4")
+
+[sub_resource type="Environment" id="Environment_fj7yv"]
+background_mode = 2
+sky = SubResource("Sky_f3sb7")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gv5m4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f3sb7"]
+albedo_color = Color(0, 0.098627605, 0.09955477, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_fj7yv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlwt5"]
+albedo_color = Color(1, 0.3019608, 0.21568628, 1)
+metallic = 0.4
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_aqk2v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_036b0"]
+albedo_color = Color(0.28235295, 1, 1, 1)
+
+[node name="World" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8386706, 0.25317112, -0.48221987, 0, 0.8853936, 0.46484205, 0.544639, 0.38984936, -0.7425536, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fj7yv")
+
+[node name="floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+mesh = SubResource("PlaneMesh_gv5m4")
+surface_material_override/0 = SubResource("StandardMaterial3D_f3sb7")
+
+[node name="building" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.240277, 0, 0, 0, 1, 0, 0, 0, 2.1635327, 0, 0, 0)
+mesh = SubResource("CylinderMesh_fj7yv")
+surface_material_override/0 = SubResource("StandardMaterial3D_tlwt5")
+
+[node name="unit" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.44709048, 0, 0, 0, 0.37820083, 0, 0, 0, 0.5350482, -2.2217124, 0.43338037, 0)
+mesh = SubResource("CapsuleMesh_aqk2v")
+surface_material_override/0 = SubResource("StandardMaterial3D_036b0")
+
+[node name="camera_base" type="Node3D" parent="."]
+transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 0, 0, 0)
+script = ExtResource("1_f3sb7")
+camera_zoom_max = 60.0
+
+[node name="camera_pivot" type="Node3D" parent="camera_base"]
+
+[node name="Camera3D" type="Camera3D" parent="camera_base/camera_pivot"]
+transform = Transform3D(-0.0053656315, 0.091763765, -0.10935624, 0.004497035, 0.109487794, 0.09165351, 0.1426855, 9.137729e-10, -0.0070009516, -2.8870306, 1.5233171, 0)
