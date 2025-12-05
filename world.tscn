@@ -1,6 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bmwy45ibgeaom"]
+[gd_scene load_steps=18 format=3 uid="uid://bmwy45ibgeaom"]
 
 [ext_resource type="Script" uid="uid://cc6bd8hfflaq3" path="res://RTS_Camera_.gd" id="1_f3sb7"]
+[ext_resource type="Script" uid="uid://0n8iu6as82mg" path="res://rts_controller.gd" id="2_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://dta81wmmyxly0" path="res://town/townhall.tscn" id="3_tlwt5"]
+[ext_resource type="Script" uid="uid://btw2qkgqahyl8" path="res://unit.gd" id="4_aqk2v"]
+[ext_resource type="Script" uid="uid://b22rxnqvom5pu" path="res://command_card.gd" id="5_036b0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gv5m4"]
 sky_top_color = Color(0.7830338, 0.8811694, 0.99145025, 1)
@@ -21,47 +25,121 @@ glow_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f3sb7"]
 albedo_color = Color(0, 0.098627605, 0.09955477, 1)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_fj7yv"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_aqk2v"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tlwt5"]
-albedo_color = Color(1, 0.3019608, 0.21568628, 1)
-metallic = 0.4
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_036b0"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_dwbse"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_tlwt5"]
+height = 0.58081055
+radius = 0.2211914
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_aqk2v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_036b0"]
 albedo_color = Color(0.28235295, 1, 1, 1)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_aqk2v"]
+radius = 0.37109375
+height = 0.7421875
+
 [node name="World" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.8386706, 0.25317112, -0.48221987, 0, 0.8853936, 0.46484205, 0.544639, 0.38984936, -0.7425536, 0, 0, 0)
+transform = Transform3D(-0.8386706, 0.25317112, -0.4822199, 0, 0.8853936, 0.46484205, 0.544639, 0.38984936, -0.7425536, 0, 7.281814, 0)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fj7yv")
 
 [node name="floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0.0020132065, 0.004459709, -0.0022277832)
 mesh = SubResource("PlaneMesh_gv5m4")
 surface_material_override/0 = SubResource("StandardMaterial3D_f3sb7")
 
-[node name="building" type="MeshInstance3D" parent="."]
-transform = Transform3D(2.240277, 0, 0, 0, 1, 0, 0, 0, 2.1635327, 0, 0, 0)
-mesh = SubResource("CylinderMesh_fj7yv")
-surface_material_override/0 = SubResource("StandardMaterial3D_tlwt5")
+[node name="StaticBody3D" type="StaticBody3D" parent="floor"]
+physics_material_override = SubResource("PhysicsMaterial_aqk2v")
 
-[node name="unit" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.44709048, 0, 0, 0, 0.37820083, 0, 0, 0, 0.5350482, -2.2217124, 0.43338037, 0)
-mesh = SubResource("CapsuleMesh_aqk2v")
-surface_material_override/0 = SubResource("StandardMaterial3D_036b0")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_036b0")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="floor"]
+navigation_mesh = SubResource("NavigationMesh_dwbse")
 
 [node name="camera_base" type="Node3D" parent="."]
 transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 0, 0, 0)
 script = ExtResource("1_f3sb7")
+camera_move_speed = 32.0
 camera_zoom_max = 60.0
 
 [node name="camera_pivot" type="Node3D" parent="camera_base"]
 
 [node name="Camera3D" type="Camera3D" parent="camera_base/camera_pivot"]
 transform = Transform3D(-0.0053656315, 0.091763765, -0.10935624, 0.004497035, 0.109487794, 0.09165351, 0.1426855, 9.137729e-10, -0.0070009516, -2.8870306, 1.5233171, 0)
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+[node name="selection_box" type="ColorRect" parent="ui"]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.20784314, 0.25490198, 1, 0.23529412)
+
+[node name="rts_controller" type="Node" parent="."]
+script = ExtResource("2_fj7yv")
+
+[node name="Townhall" parent="." instance=ExtResource("3_tlwt5")]
+transform = Transform3D(-0.98795986, 0, -0.15471041, 0, 1, 0, 0.15471041, 0, -0.98795986, 3.5375419, 0, 0.04963827)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." groups=["units"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.063496, 0.32661247, 0)
+script = ExtResource("4_aqk2v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.032926917, 0)
+shape = SubResource("CylinderShape3D_tlwt5")
+
+[node name="unit" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(0.44709048, 0, 0, 0, 0.37820083, 0, 0, 0, 0.5350482, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_aqk2v")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_036b0")
+
+[node name="Label3D" type="Label3D" parent="CharacterBody3D/unit"]
+transform = Transform3D(1, 0, 0, 0, 1.4210881, 0, 0, 0, 1, 0, 1.3333188, 0)
+billboard = 1
+text = "Unit
+"
+
+[node name="Selector" type="Area3D" parent="CharacterBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Selector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0056435466, 0)
+shape = SubResource("CapsuleShape3D_aqk2v")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="CharacterBody3D"]
+
+[node name="CommandCard" type="Control" parent="."]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("5_036b0")
+
+[node name="PanelContainer" type="PanelContainer" parent="CommandCard"]
+layout_mode = 0
+offset_right = 400.0
+offset_bottom = 200.0
+
+[node name="GridContainer" type="GridContainer" parent="CommandCard/PanelContainer"]
+layout_mode = 2
+columns = 3
