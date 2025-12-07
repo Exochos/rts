@@ -1,33 +1,23 @@
-[gd_scene load_steps=7 format=3 uid="uid://dta81wmmyxly0"]
+[gd_scene load_steps=6 format=3 uid="uid://dta81wmmyxly0"]
 
 [ext_resource type="Script" uid="uid://du0qqxv64hmdq" path="res://town/townhall.gd" id="1_bqp3n"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_2fva1"]
-
-[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_j7rfs"]
-albedo_color = Color(1, 0.3529412, 0.06666667, 1)
-
-[sub_resource type="PrismMesh" id="PrismMesh_07man"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bqp3n"]
-albedo_color = Color(0.34901962, 1, 1, 1)
+[ext_resource type="PackedScene" uid="uid://b05ysudf38pw5" path="res://assets/buildings/buildings/green/building_church_green.gltf" id="2_2fva1"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gepqq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2fva1"]
+albedo_color = Color(0.4584309, 0.45441604, 4.813075e-07, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_j7rfs"]
+material = SubResource("StandardMaterial3D_2fva1")
 
 [node name="Townhall" type="Node3D" groups=["buildings"]]
 script = ExtResource("1_bqp3n")
 
 [node name="Model" type="Node3D" parent="."]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(5.055622, 0, 0, 0, 0.66910625, 0, 0, 0, 4.3588305, 0, 0, 0)
-mesh = SubResource("CylinderMesh_2fva1")
-surface_material_override/0 = SubResource("ORMMaterial3D_j7rfs")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(3.385021, 0, 0, 0, 3.0222871, 0, 0, 0, 2.3321092, 0, 1.7328261, 0)
-mesh = SubResource("PrismMesh_07man")
-surface_material_override/0 = SubResource("StandardMaterial3D_bqp3n")
+[node name="building_church_green2" parent="Model" instance=ExtResource("2_2fva1")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 
 [node name="Selector" type="Area3D" parent="."]
 
@@ -38,7 +28,7 @@ transform = Transform3D(5.390518, 0, 0, 0, 4.4834967, 0, 0, 0, 4.967809, 0, 0, 0
 shape = SubResource("SphereShape3D_gepqq")
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.2605453, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.0695796, 0)
 gi_lightmap_texel_scale = 2.0
 gi_lightmap_scale = 1
 pixel_size = 0.015
@@ -46,3 +36,10 @@ billboard = 1
 shaded = true
 text = "Townhall
 "
+
+[node name="WorkerSpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5339906, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorkerSpawnPoint"]
+transform = Transform3D(0.6423886, 0, 0, 0, 0.5182164, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("PlaneMesh_j7rfs")

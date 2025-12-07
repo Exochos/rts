@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3 uid="uid://ciijmxethmta4"]
+
+[ext_resource type="PackedScene" uid="uid://b6jbr7dxr8t03" path="res://assets/characters/Animation_Running_withSkin.fbx" id="1_0i0p4"]
+
+[node name="Animation_Running_withSkin" instance=ExtResource("1_0i0p4")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/rotation = Quaternion(0.24242721, -0.010026784, 0.02705352, 0.9697405)
+bones/1/rotation = Quaternion(0.8556617, 0.0067114197, -0.055161946, 0.5145438)
+bones/2/rotation = Quaternion(0.8881739, -0.017548207, -0.06531759, 0.45450312)
+bones/3/rotation = Quaternion(-0.371459, -0.045402527, -0.04579797, 0.92620695)
+bones/4/rotation = Quaternion(-0.3446246, 0.01856888, -0.02485534, 0.9382277)
+bones/5/rotation = Quaternion(0.9870661, 0.0036294614, 0.109335236, 0.1171894)
+bones/6/rotation = Quaternion(0.24985121, -0.1083521, 0.010158448, 0.96214914)
+bones/7/rotation = Quaternion(-0.45049477, -0.04903124, 0.04493202, 0.89029855)
+bones/8/rotation = Quaternion(-0.58961165, -0.00011284329, 0.014000469, 0.8075655)
+bones/9/rotation = Quaternion(-0.10868934, 0.080431834, -0.04400274, 0.98983896)
+bones/10/rotation = Quaternion(-0.033695336, 0.014534505, 0.01309725, 0.99924064)
+bones/11/rotation = Quaternion(-0.16696751, 0.009424686, 0.013654952, 0.9858228)
+bones/12/rotation = Quaternion(0.6154723, 0.5816963, -0.40339968, 0.34654287)
+bones/13/rotation = Quaternion(0.28456852, 0.5549339, -0.3733628, 0.68678194)
+bones/14/rotation = Quaternion(-0.0688068, -0.096420065, 0.5228846, 0.8441331)
+bones/15/rotation = Quaternion(0.09471091, -0.0113491835, -0.049397316, 0.9942138)
+bones/16/rotation = Quaternion(-0.5940352, 0.5915954, -0.4329831, -0.33115363)
+bones/17/rotation = Quaternion(0.38504404, -0.08837672, -0.009113888, 0.9186119)
+bones/18/rotation = Quaternion(-0.06882099, 0.10286231, -0.6682194, 0.7335979)
+bones/19/rotation = Quaternion(-0.08467046, 0.123664826, 0.0071883667, 0.98867905)
+bones/20/rotation = Quaternion(0.13402778, 0.0019224538, -0.039115537, 0.9902035)
+bones/21/rotation = Quaternion(0.22634126, -0.06013026, 0.027248513, 0.97180843)
+bones/22/rotation = Quaternion(-0.24643216, 9.019202e-05, -0.008336077, 0.96912426)
+
+[node name="SpringBoneSimulator3D" type="SpringBoneSimulator3D" parent="Armature/Skeleton3D" index="1"]
+setting_count = 1
+settings/0/root_bone_name = "Head"
+settings/0/root_bone = 21
+settings/0/end_bone_name = "neck"
+settings/0/end_bone = 20
+settings/0/extend_end_bone = false
+settings/0/center_from = 0
+settings/0/individual_config = false
+settings/0/rotation_axis = 3
+settings/0/radius/value = 0.02
+settings/0/radius/damping_curve = null
+settings/0/stiffness/value = 1.0
+settings/0/stiffness/damping_curve = null
+settings/0/drag/value = 0.4
+settings/0/drag/damping_curve = null
+settings/0/gravity/value = 0.0
+settings/0/gravity/damping_curve = null
+settings/0/gravity/direction = Vector3(0, -1, 0)
+settings/0/enable_all_child_collisions = true
+settings/0/exclude_collision_count = 0

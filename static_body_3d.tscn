@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bepvrc1hfjs8f"]
+
+[ext_resource type="Script" uid="uid://nvunipkjjhy1" path="res://gatherable_resource.gd" id="1_m45xy"]
+[ext_resource type="PackedScene" uid="uid://dgk6ocdkex55k" path="res://assets/characters/physics/Dancing Twerk.fbx" id="2_m45xy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wsmgn"]
+size = Vector3(4.178955, 1, 2.665039)
+
+[node name="StaticBody3D" type="StaticBody3D"]
+script = ExtResource("1_m45xy")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.026000977, 0, 0.83251953)
+shape = SubResource("BoxShape3D_wsmgn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[node name="Dancing Twerk" parent="." instance=ExtResource("2_m45xy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.29172558, 0, 1.4210801)
