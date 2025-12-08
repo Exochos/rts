@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://de0kf2m2c5g5y"]
+
+[ext_resource type="Script" path="res://materials/tree/tree.gd" id="1_gvmkm"]
+[ext_resource type="PackedScene" uid="uid://dt1e1pftrpfhm" path="res://assets/buildings/decoration/nature/tree_single_A.gltf" id="2_d2g23"]
+[ext_resource type="PackedScene" path="res://materials/tree/tree_mesh_cut.tscn" id="3_44ud8"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_d2g23"]
+height = 5.510315
+radius = 0.6542969
+
+[sub_resource type="Skin" id="Skin_v5rta"]
+
+[node name="Tree" type="Node3D" groups=["resource_tree"]]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." groups=["resource_tree"]]
+script = ExtResource("1_gvmkm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+shape = SubResource("CylinderShape3D_d2g23")
+
+[node name="TreeMesh" type="MeshInstance3D" parent="."]
+skin = SubResource("Skin_v5rta")
+
+[node name="tree" parent="TreeMesh" instance=ExtResource("2_d2g23")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 1.0799441, 0)
+
+[node name="StumpMesh" type="MeshInstance3D" parent="."]
+
+[node name="tree_stump" parent="StumpMesh" instance=ExtResource("3_44ud8")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
