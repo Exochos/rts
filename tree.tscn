@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://de0kf2m2c5g5y"]
+[gd_scene format=3 uid="uid://dra7wk44gkcmu"]
 
 [ext_resource type="Script" path="res://materials/tree/tree.gd" id="1_gvmkm"]
 [ext_resource type="PackedScene" uid="uid://dt1e1pftrpfhm" path="res://assets/buildings/decoration/nature/tree_single_A.gltf" id="2_d2g23"]

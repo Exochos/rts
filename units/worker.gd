@@ -43,8 +43,10 @@ enum State {
 # NODE REFERENCES
 # ============================================================================
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
-@onready var anim: AnimationPlayer = $AnimationPlayer
-@onready var model_node = $"Model (Node3D)/Ranger"
+@onready var anim: AnimationPlayer = $Model/Ranger/AnimationPlayer
+@onready var model_node: Node3D = $Model/Ranger
+
+
 
 # ============================================================================
 # STATE VARIABLES
@@ -433,11 +435,11 @@ func _update_animation() -> void:
 
 	match current_state:
 		State.IDLE:
-			desired_animation = "worker/Jump_Idle"
+			desired_animation = "worker/Idle_A"
 		State.MOVING, State.RETURNING:
-			desired_animation = "worker/Running_B"
+			desired_animation = "worker/Running_A"
 		State.GATHERING:
-			desired_animation = "worker/Interact"  # or PickUp animation
+			desired_animation = "worker/Chop"  # or PickUp animation
 		State.BUILDING:
 			desired_animation = "worker/Use_Item"
 		State.ATTACKING:

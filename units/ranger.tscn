@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://bmosjy2nfkpcj"]
+
+[ext_resource type="PackedScene" uid="uid://b4xj7n4sigsjr" path="res://units/Ranger.glb" id="1_siy1t"]
+[ext_resource type="Animation" uid="uid://qcmjq504j1rh" path="res://units/animations/Chop.res" id="2_uvu21"]
+[ext_resource type="Animation" uid="uid://dbemimdmtv5gc" path="res://units/animations/Idle_A.res" id="3_al2uj"]
+[ext_resource type="Animation" uid="uid://dh5yq78hq0the" path="res://units/animations/Running_A.res" id="4_l3lnh"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kfapy"]
+_data = {
+&"Chop": ExtResource("2_uvu21"),
+&"Idle_A": ExtResource("3_al2uj"),
+&"Running_A": ExtResource("4_l3lnh")
+}
+
+[node name="Ranger" unique_id=2054320938 instance=ExtResource("1_siy1t")]
+
+[node name="Skeleton3D" parent="Rig_Medium" parent_id_path=PackedInt32Array(641709988) index="0" unique_id=107272233]
+bones/1/position = Vector3(0, 0.39206383, 0)
+bones/1/rotation = Quaternion(-1.11122625e-10, 0.043157753, 2.5724098e-09, 0.9990683)
+bones/2/rotation = Quaternion(0.9923529, 0.058147535, 0.07043114, 0.08303041)
+bones/3/rotation = Quaternion(0.2629205, 6.5087576e-08, -1.7385344e-07, 0.9648175)
+bones/4/rotation = Quaternion(-0.5301546, -0.11437367, 0.0418054, 0.8391109)
+bones/5/rotation = Quaternion(1.5364014e-05, 0.92026025, -0.39130703, -3.4204522e-06)
+bones/6/rotation = Quaternion(0.9989242, -0.011679399, 0.039364, 0.021552067)
+bones/7/rotation = Quaternion(0.17824358, -6.564593e-08, 1.2431246e-07, 0.9839865)
+bones/8/rotation = Quaternion(-0.5110849, 0.10089545, 0.012094084, 0.8535022)
+bones/9/rotation = Quaternion(-0.00013730724, 0.9202821, -0.39125553, 3.1171374e-05)
+bones/10/rotation = Quaternion(-6.938893e-18, 7.1054274e-15, 4.93038e-32, 1)
+bones/11/rotation = Quaternion(0.0050096647, 7.4377144e-09, 0.00043362536, 0.99998736)
+bones/12/rotation = Quaternion(-0.0035347077, -0.031341568, -0.0001945917, 0.9995025)
+bones/13/rotation = Quaternion(-0.56062764, 0.046832677, 0.7369308, 0.37474835)
+bones/14/rotation = Quaternion(6.551466e-09, 4.5755723e-08, 0.37637335, 0.9264681)
+bones/15/rotation = Quaternion(2.249753e-10, 6.8246844e-09, -0.026658092, 0.99964464)
+bones/15/scale = Vector3(0.99999994, 0.99999994, 1)
+bones/16/rotation = Quaternion(-0.21243732, 0.38411772, -0.14025739, 0.8874975)
+bones/17/position = Vector3(-1.5415011e-08, 0.096125126, -0.057500005)
+bones/17/rotation = Quaternion(-8.856115e-09, -1.2217303e-08, 0.7071068, 0.7071067)
+bones/18/rotation = Quaternion(-0.5336149, -0.116774455, -0.77174187, 0.32562765)
+bones/19/rotation = Quaternion(1.2367585e-08, -6.425559e-08, -0.35859546, 0.93349314)
+bones/20/rotation = Quaternion(1.514567e-08, -7.3584383e-09, 0.0266581, 0.99964464)
+bones/20/scale = Vector3(1.0000001, 1, 1)
+bones/21/rotation = Quaternion(-0.2221493, -0.3458293, 0.18463314, 0.8927275)
+bones/22/rotation = Quaternion(-8.856098e-09, 1.2217325e-08, -0.7071068, 0.7071067)
+
+[node name="Ranger_Quiver" parent="Rig_Medium/Skeleton3D" index="7" unique_id=45766266]
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1" unique_id=1077226410]
+libraries/worker = SubResource("AnimationLibrary_kfapy")

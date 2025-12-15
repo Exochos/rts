@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cxhgf1djisotx"]
 
 [ext_resource type="Script" uid="uid://bi76go8dpp2qs" path="res://units/worker.gd" id="1_55o48"]
-[ext_resource type="PackedScene" uid="uid://b4xj7n4sigsjr" path="res://units/Ranger.glb" id="2_nip6m"]
+[ext_resource type="PackedScene" uid="uid://bmosjy2nfkpcj" path="res://units/ranger.tscn" id="2_nip6m"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nip6m"]
 
@@ -16,10 +16,10 @@ shape = SubResource("CapsuleShape3D_nip6m")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=807370019]
 
-[node name="Model (Node3D)" type="Node3D" parent="." unique_id=1489062259]
+[node name="Model" type="Node3D" parent="." unique_id=1489062259]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.34096605, 0)
 
-[node name="Ranger" parent="Model (Node3D)" unique_id=2054320938 instance=ExtResource("2_nip6m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.56178916, 0)
+[node name="Ranger" parent="Model" unique_id=2054320938 instance=ExtResource("2_nip6m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0161444, 0)
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1848269338]

@@ -37,7 +37,6 @@ size = Vector3(100, 2, 100)
 size = Vector3(100, 2, 100)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pkg7o"]
-transparency = 1
 albedo_color = Color(0, 0.64705884, 0.14509805, 0.30588236)
 
 [node name="World" type="Node3D" unique_id=412345574]
@@ -56,12 +55,12 @@ environment = SubResource("Environment_fj7yv")
 transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 0, 0, 0)
 script = ExtResource("1_f3sb7")
 camera_move_speed = 32.0
-camera_zoom_max = 60.0
+camera_zoom_max = 100.0
 
 [node name="camera_pivot" type="Node3D" parent="camera_base" unique_id=444278456]
 
 [node name="Camera3D" type="Camera3D" parent="camera_base/camera_pivot" unique_id=322767274]
-transform = Transform3D(-0.0053656315, 0.091763765, -0.10935623, 0.004497035, 0.10948779, 0.09165351, 0.1426855, 7.99875e-10, -0.007000951, -2.5844743, 1.0734501, 0)
+transform = Transform3D(-0.0053656315, 0.09176377, -0.10935624, 0.004497035, 0.109487794, 0.09165351, 0.1426855, 1.0650109e-09, -0.0070009516, -2.5844743, 0.6702441, 0)
 fov = 108.02012
 
 [node name="ui" type="CanvasLayer" parent="." unique_id=1906225500]
@@ -76,7 +75,7 @@ color = Color(0.20784314, 0.25490198, 1, 0.23529412)
 script = ExtResource("2_fj7yv")
 
 [node name="Townhall" parent="." unique_id=405179301 instance=ExtResource("3_tlwt5")]
-transform = Transform3D(-0.98795986, 0, -0.15471041, 0, 1, 0, 0.15471041, 0, -0.98795986, 3.5375419, 0.46477473, 0.04963827)
+transform = Transform3D(-0.98795986, 0, -0.15471041, 0, 1, 0, 0.15471041, 0, -0.98795986, 3.5375419, 0.045781255, 0.04963827)
 
 [node name="CommandCard" type="Control" parent="." unique_id=1489285819]
 custom_minimum_size = Vector2(400, 200)
@@ -119,6 +118,7 @@ script = ExtResource("6_dwbse")
 layout_mode = 0
 
 [node name="Worker" parent="." unique_id=1427411237 instance=ExtResource("4_dwbse")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.26580283, 0)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=228041333]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.99816585, 0)
@@ -132,8 +132,18 @@ physics_material_override = SubResource("PhysicsMaterial_aqk2v")
 shape = SubResource("BoxShape3D_dwbse")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Ground" unique_id=615604610]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.398736, 0)
 mesh = SubResource("BoxMesh_dwbse")
 surface_material_override/0 = SubResource("StandardMaterial3D_pkg7o")
 
 [node name="Tree" parent="." unique_id=1460234327 instance=ExtResource("7_pkg7o")]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 7.365716, 4.7683716e-07, 13.483206)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 7.365716, 0.38624525, 13.483206)
+
+[node name="Tree2" parent="." unique_id=780533274 instance=ExtResource("7_pkg7o")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 7.365716, 0.38624525, 12.125648)
+
+[node name="Tree3" parent="." unique_id=45520366 instance=ExtResource("7_pkg7o")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 7.365716, 0.38624525, 14.629839)
+
+[node name="Tree4" parent="." unique_id=680749475 instance=ExtResource("7_pkg7o")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 7.365716, 0.38624525, 16.360287)
