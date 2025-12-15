@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dta81wmmyxly0"]
+[gd_scene format=3 uid="uid://dta81wmmyxly0"]
 
 [ext_resource type="Script" uid="uid://du0qqxv64hmdq" path="res://town/townhall.gd" id="1_bqp3n"]
 [ext_resource type="PackedScene" uid="uid://b05ysudf38pw5" path="res://assets/buildings/buildings/green/building_church_green.gltf" id="2_2fva1"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gepqq"]
+radius = 0.35869431
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2fva1"]
 albedo_color = Color(0.4584309, 0.45441604, 4.813075e-07, 1)
@@ -11,23 +12,23 @@ albedo_color = Color(0.4584309, 0.45441604, 4.813075e-07, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_j7rfs"]
 material = SubResource("StandardMaterial3D_2fva1")
 
-[node name="Townhall" type="Node3D" groups=["buildings"]]
+[node name="Townhall" type="Node3D" unique_id=1463969635 groups=["buildings"]]
 script = ExtResource("1_bqp3n")
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." unique_id=889834508]
 
-[node name="building_church_green2" parent="Model" instance=ExtResource("2_2fva1")]
+[node name="building_church_green2" parent="Model" unique_id=174982933 instance=ExtResource("2_2fva1")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 
-[node name="Selector" type="Area3D" parent="."]
+[node name="Selector" type="Area3D" parent="." unique_id=869709588]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1598760362]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(5.390518, 0, 0, 0, 4.4834967, 0, 0, 0, 4.967809, 0, 0, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1108560601]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 1, 0)
 shape = SubResource("SphereShape3D_gepqq")
 
-[node name="Label3D" type="Label3D" parent="."]
+[node name="Label3D" type="Label3D" parent="." unique_id=357862788]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.0695796, 0)
 gi_lightmap_texel_scale = 2.0
 gi_lightmap_scale = 1
@@ -37,9 +38,9 @@ shaded = true
 text = "Townhall
 "
 
-[node name="WorkerSpawnPoint" type="Node3D" parent="."]
+[node name="WorkerSpawnPoint" type="Node3D" parent="." unique_id=835155280]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5339906, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WorkerSpawnPoint"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WorkerSpawnPoint" unique_id=587710530]
 transform = Transform3D(0.6423886, 0, 0, 0, 0.5182164, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("PlaneMesh_j7rfs")

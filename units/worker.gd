@@ -43,8 +43,8 @@ enum State {
 # NODE REFERENCES
 # ============================================================================
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
-@onready var anim: AnimationPlayer = $Skeleton_Minion/AnimationPlayer
-@onready var model_node = $Skeleton_Minion
+@onready var anim: AnimationPlayer = $AnimationPlayer
+@onready var model_node = $"Model (Node3D)/Ranger"
 
 # ============================================================================
 # STATE VARIABLES
@@ -74,8 +74,12 @@ func _ready() -> void:
 
 	# Configure NavigationAgent3D
 	if nav_agent:
-		nav_agent.path_desired_distance = 0.5
-		nav_agent.target_desired_distance = 0.5
+		await get_tree().physics_frame
+
+		# Set navigation map from world
+		nav_agent.set_navigation_map(get_world_3d().navigation_map)
+		nav_agent.path_desired_distance = 1.0
+		nav_agent.target_desired_distance = 1.0
 		nav_agent.max_speed = move_speed
 
 		# Wait for navigation mesh to be ready
@@ -110,7 +114,7 @@ func _physics_process(delta: float) -> void:
 # STATE PROCESSORS
 # ============================================================================
 
-func _process_idle(delta: float) -> void:
+func _process_idle(_delta: float) -> void:
 	# Worker is idle, no movement
 	velocity = Vector3.ZERO
 	move_and_slide()
@@ -169,7 +173,7 @@ func _process_returning(delta: float) -> void:
 
 	# Check if we've arrived at dropoff
 	var distance_to_dropoff = global_position.distance_to(dropoff_point.global_position)
-	if distance_to_dropoff < 2.0:
+	if distance_to_dropoff < 3.1:
 		_dropoff_resources()
 		return
 
@@ -237,34 +241,41 @@ func _process_attacking(delta: float) -> void:
 
 ## Called by RTS controller when right-clicking on terrain
 func move_to_position(pos: Vector3) -> void:
-	print("Worker moving to: ", pos)
-	target_position = pos
-	target_position.y = global_position.y  # Keep height consistent
 	target_node = null
 
-	# Set navigation target
 	if nav_agent:
-		nav_agent.target_position = target_position
+		var map := nav_agent.get_navigation_map()
+		if map.is_valid():
+			target_position = NavigationServer3D.map_get_closest_point(map, pos)
+			nav_agent.set_target_position(target_position)
+		else:
+			print("[ERROR] Navigation map invalid")
+	else:
+		target_position = pos
 
 	_change_state(State.MOVING)
 
 ## Called by RTS controller when right-clicking on an enemy
 func attack_target(target: Node) -> void:
-	print("Worker attacking: ", target.name)
 	target_node = target
 	_change_state(State.ATTACKING)
 
 ## Called when player orders worker to gather from a resource
 func gather_from_resource(resource_node: Node) -> void:
+	if not is_instance_valid(resource_node):
+		print("[ERROR] Invalid resource node")
+		return
+
 	if not resource_node.has_method("is_gatherable"):
-		print("Error: Target is not a gatherable resource")
+		print("[ERROR] Target is not a gatherable resource")
 		return
 
 	target_node = resource_node
 	target_position = resource_node.global_position
 
-	# Move to resource first
-	if global_position.distance_to(target_position) > 2.0:
+	# Move to resource first if too far
+	var distance = global_position.distance_to(target_position)
+	if distance > 4.0:
 		if nav_agent:
 			nav_agent.target_position = target_position
 		_change_state(State.MOVING)
@@ -294,7 +305,7 @@ func _gather_resource() -> void:
 		carried_resources += amount_to_gather
 		resource_type = target_node.resource_name
 
-		print("Worker gathered %d %s (carrying %d/%d)" % [amount_to_gather, resource_type, carried_resources, carry_capacity])
+		print("Gathered %d %s (carrying %d/%d)" % [amount_to_gather, resource_type, carried_resources, carry_capacity])
 
 	# If inventory is full, return to dropoff
 	if carried_resources >= carry_capacity:
@@ -310,7 +321,7 @@ func _return_resources() -> void:
 	_change_state(State.RETURNING)
 
 func _dropoff_resources() -> void:
-	print("Worker deposited %d %s at %s" % [carried_resources, resource_type, dropoff_point.name])
+	print("Deposited %d %s" % [carried_resources, resource_type])
 
 	# TODO: Actually add resources to player's stockpile
 	# PlayerResources.add_resource(resource_type, carried_resources)
@@ -340,9 +351,6 @@ func _find_nearest_dropoff() -> void:
 				nearest_dist = dist
 				dropoff_point = building
 
-	if dropoff_point:
-		print("Worker found dropoff point: ", dropoff_point.name)
-
 # ============================================================================
 # COMBAT SYSTEM
 # ============================================================================
@@ -351,7 +359,7 @@ func _perform_attack() -> void:
 	if not is_instance_valid(target_node):
 		return
 
-	print("Worker deals %d damage to %s" % [attack_damage, target_node.name])
+	print("Attacking %s for %d damage" % [target_node.name, attack_damage])
 
 	# TODO: Apply damage to target
 	if target_node.has_method("take_damage"):
@@ -411,7 +419,7 @@ func _change_state(new_state: State) -> void:
 
 	# Enter new state
 	current_state = new_state
-	print("Worker state changed to: ", State.keys()[current_state])
+	print("State: ", State.keys()[current_state])
 
 # ============================================================================
 # ANIMATION SYSTEM

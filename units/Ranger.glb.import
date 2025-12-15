@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dkni7eog5ne5f"
-path="res://.godot/imported/Skeleton_Minion.glb-ce765ddf75f901af07cf6db6f704bc8f.scn"
+uid="uid://b4xj7n4sigsjr"
+path="res://.godot/imported/Ranger.glb-0e4a02c5bf236b6b8e4778fea967ad1d.scn"
 
 [deps]
 
-source_file="res://assets/characters/Skeleton_Minion.glb"
-dest_files=["res://.godot/imported/Skeleton_Minion.glb-ce765ddf75f901af07cf6db6f704bc8f.scn"]
+source_file="res://units/Ranger.glb"
+dest_files=["res://.godot/imported/Ranger.glb-0e4a02c5bf236b6b8e4778fea967ad1d.scn"]
 
 [params]
 

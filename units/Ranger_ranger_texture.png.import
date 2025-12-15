@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cll3wso5dn14h"
-path.s3tc="res://.godot/imported/Skeleton_Minion_skeleton_texture.png-96d823606ff067cd31dea70d72eeda4c.s3tc.ctex"
+uid="uid://bu6m1vj3tyi6h"
+path.s3tc="res://.godot/imported/Ranger_ranger_texture.png-355ad0ddeefb73c0bf032345a1ac7582.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "661544b1e8ba10b5a0c98b638eae6d0b"
+"md5": "cce0a8fd41d7db9bef78ccb560e9500d"
 }
 
 [deps]
 
-source_file="res://assets/characters/Skeleton_Minion_skeleton_texture.png"
-dest_files=["res://.godot/imported/Skeleton_Minion_skeleton_texture.png-96d823606ff067cd31dea70d72eeda4c.s3tc.ctex"]
+source_file="res://units/Ranger_ranger_texture.png"
+dest_files=["res://.godot/imported/Ranger_ranger_texture.png-355ad0ddeefb73c0bf032345a1ac7582.s3tc.ctex"]
 
 [params]
 

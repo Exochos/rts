@@ -141,31 +141,53 @@ func _handle_right_click():
 	if result:
 			var hit_node = result.collider
 			print("--- Right Click Hit: ", hit_node.name, " | Class: ", hit_node.get_class())
-			
+
 			# Check groups
 			print("    Groups: ", hit_node.get_groups())
 
-			# 1. Attack
-			if hit_node.is_in_group("enemies"):
-					print("    -> Identified as ENEMY")
-					# ... attack logic ...
+			# 1. Gather Resources
+			if hit_node.is_in_group("gatherable") or hit_node.has_method("is_gatherable"):
+					print("    -> Identified as GATHERABLE RESOURCE")
+					print("    -> Selected Unit Count: ", selected_units.size())
 
-			# 2. Move
+					for unit in selected_units:
+							if not is_instance_valid(unit):
+									print("    -> Found Deleted Unit in array, skipping.")
+									continue
+
+							if unit.has_method("gather_from_resource"):
+									unit.gather_from_resource(hit_node)
+									print("    -> ", unit.name, " ordered to gather from ", hit_node.name)
+							else:
+									print("    -> ", unit.name, " cannot gather resources")
+
+			# 2. Attack
+			elif hit_node.is_in_group("enemies"):
+					print("    -> Identified as ENEMY")
+
+					for unit in selected_units:
+							if not is_instance_valid(unit):
+									continue
+
+							if unit.has_method("attack_target"):
+									unit.attack_target(hit_node)
+
+			# 3. Move
 			# Relaxed condition: Check if it's NOT an enemy and NOT a unit
-			elif not hit_node.is_in_group("units"): 
+			elif not hit_node.is_in_group("units"):
 					print("    -> Identified as GROUND/TERRAIN")
 					print("    -> Selected Unit Count: ", selected_units.size())
-					
+
 					for unit in selected_units:
 							# Check validity before calling
 							if not is_instance_valid(unit):
 									print("    -> Found Deleted Unit in array, skipping.")
 									continue
-									
+
 							if unit.has_method("move_to_position"):
 									unit.move_to_position(result.position)
 							else:
 									print("    -> CRITICAL: ", unit.name, " has no move script!")
-			
+
 			else:
 					print("    -> Clicked a friendly unit or undefined object. Ignoring.")
