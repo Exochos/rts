@@ -8,6 +8,7 @@ size = Vector3(1.5379639, 2, 3.9322815)
 
 [node name="GoldMine" type="StaticBody3D" unique_id=1885423111 groups=["gatherable", "resource_mine"]]
 script = ExtResource("1_resource")
+resource_name = "Gold"
 amount = 500
 max_amount = 500
 
@@ -21,7 +22,7 @@ shape = SubResource("BoxShape3D_mine")
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, -4.6193233)
 
 [node name="Label3D" type="Label3D" parent="." unique_id=2090627656]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.839627, 2.7697186, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.839627, 2.2653413, 0)
 billboard = 1
 text = "Gold Mine
 "

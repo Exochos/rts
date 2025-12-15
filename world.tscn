@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c2qx8hxjko7aq" path="res://ui/resource_counter.tscn" id="8_resource_counter"]
 [ext_resource type="PackedScene" uid="uid://blr6lpctekhaa" path="res://assets/buildings/decoration/nature/cloud_big.gltf" id="9_ioo17"]
 [ext_resource type="PackedScene" uid="uid://dqaurd37be18s" path="res://town/gold_mine.tscn" id="10_wse8f"]
+[ext_resource type="PackedScene" uid="uid://ce7k5xscgbaep" path="res://town/ore_mine.tscn" id="11_ic0uy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gv5m4"]
 sky_top_color = Color(0.7830338, 0.8811694, 0.99145025, 1)
@@ -161,3 +162,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.728607, 6.491683, -18.947
 
 [node name="GoldMine" parent="." unique_id=968993674 instance=ExtResource("10_wse8f")]
 transform = Transform3D(-0.7996008, 0, 0.6005319, 0, 1, 0, -0.6005319, 0, -0.7996008, 13.819218, 1.1645652, 4.349184)
+
+[node name="OreMine" parent="." unique_id=538400930 instance=ExtResource("11_ic0uy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7784066, 0.4090594, -1.2921047)
