@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ce7k5xscgbaep"]
+
+[ext_resource type="PackedScene" uid="uid://bwg1skqgwsea2" path="res://town/Ore_Mine.glb" id="1_8rup3"]
+
+[node name="Ore_Mine" unique_id=1080216529 instance=ExtResource("1_8rup3")]
+transform = Transform3D(1, 0, 0, 0, 0.89431083, 0, 0, 0, 0.9035627, 0, 0, -10.710034)

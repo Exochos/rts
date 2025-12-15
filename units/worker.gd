@@ -328,8 +328,8 @@ func _dropoff_resources() -> void:
 	# Store the resource type before clearing inventory
 	var last_resource_type = resource_type
 
-	# TODO: Actually add resources to player's stockpile
-	# PlayerResources.add_resource(resource_type, carried_resources)
+	# Add resources to player's stockpile via ResourceManager
+	ResourceManager.add_resource(resource_type, carried_resources)
 
 	# Clear inventory
 	carried_resources = 0
@@ -477,7 +477,13 @@ func _update_animation() -> void:
 		State.MOVING, State.RETURNING:
 			desired_animation = "worker/Running_A"
 		State.GATHERING:
-			desired_animation = "worker/Chop"  # or PickUp animation
+			# Different animations for different resource types
+			if resource_type == "Wood":
+				desired_animation = "worker/Chop"
+			elif resource_type == "Gold" or resource_type == "Ore":
+				desired_animation = "worker/PickUp"
+			else:
+				desired_animation = "worker/Chop"  # Default to chop
 		State.BUILDING:
 			desired_animation = "worker/Use_Item"
 		State.ATTACKING:

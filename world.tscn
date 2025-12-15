@@ -7,6 +7,9 @@
 [ext_resource type="Script" uid="uid://b22rxnqvom5pu" path="res://command_card.gd" id="5_036b0"]
 [ext_resource type="Script" uid="uid://hqu3gg4awaov" path="res://control.gd" id="6_dwbse"]
 [ext_resource type="PackedScene" uid="uid://de0kf2m2c5g5y" path="res://town/tree.tscn" id="7_pkg7o"]
+[ext_resource type="PackedScene" uid="uid://c2qx8hxjko7aq" path="res://ui/resource_counter.tscn" id="8_resource_counter"]
+[ext_resource type="PackedScene" uid="uid://blr6lpctekhaa" path="res://assets/buildings/decoration/nature/cloud_big.gltf" id="9_ioo17"]
+[ext_resource type="PackedScene" uid="uid://dqaurd37be18s" path="res://town/gold_mine.tscn" id="10_wse8f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gv5m4"]
 sky_top_color = Color(0.7830338, 0.8811694, 0.99145025, 1)
@@ -43,7 +46,9 @@ albedo_color = Color(0, 0.3544466, 0.06169885, 1)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1850982222]
 transform = Transform3D(-0.8386706, 0.25317112, -0.4822199, 0, 0.8853936, 0.46484205, 0.544639, 0.38984936, -0.7425536, 0, 7.281814, 0)
-light_color = Color(1, 1, 0.40784314, 1)
+light_color = Color(1.5910738, 1.6713666, 0.36220506, 1)
+light_indirect_energy = 1.235
+light_volumetric_fog_energy = 1.475
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1752335264]
@@ -70,6 +75,12 @@ visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(0.20784314, 0.25490198, 1, 0.23529412)
+
+[node name="ResourceCounter" parent="ui" unique_id=1507898067 instance=ExtResource("8_resource_counter")]
+offset_left = -145.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 159.0
 
 [node name="rts_controller" type="Node" parent="." unique_id=1258935958]
 script = ExtResource("2_fj7yv")
@@ -105,12 +116,9 @@ follow_viewport_enabled = true
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=1535546956]
 layout_mode = 3
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -131.0
+anchors_preset = 0
+offset_right = 131.0
 offset_bottom = 64.0
-grow_horizontal = 0
 theme = SubResource("Theme_dwbse")
 script = ExtResource("6_dwbse")
 
@@ -147,3 +155,9 @@ transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 7.365716, 0.38624525, 1
 
 [node name="Tree4" parent="." unique_id=680749475 instance=ExtResource("7_pkg7o")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 7.365716, 0.38624525, 16.360287)
+
+[node name="cloud_big2" parent="." unique_id=795169640 instance=ExtResource("9_ioo17")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.728607, 6.491683, -18.947916)
+
+[node name="GoldMine" parent="." unique_id=968993674 instance=ExtResource("10_wse8f")]
+transform = Transform3D(-0.7996008, 0, 0.6005319, 0, 1, 0, -0.6005319, 0, -0.7996008, 13.819218, 1.1645652, 4.349184)
