@@ -117,6 +117,17 @@ Mouse inputs handled directly via `InputEventMouseButton`:
 4. Call `move_to_position(result.position)` on all selected units
 5. Units update their internal `target_pos` and `moving` flags
 
+**Resource Gathering Flow:**
+1. User right-clicks on a gatherable resource (tree, gold, etc.) with workers selected
+2. `rts_controller._handle_right_click()` detects object in `"gatherable"` group
+3. Calls `gather_from_resource(resource_node)` on all selected workers
+4. Worker moves to resource if distance > 4.0, otherwise starts gathering immediately
+5. Worker gathers resources every `gather_interval` seconds until inventory is full
+6. Worker automatically returns to nearest townhall when carrying capacity is reached
+7. Worker deposits resources and returns to gathering if resource still exists
+8. If resource is depleted, worker automatically searches for nearby resources of the same type within 20 units
+9. If no nearby resources found, worker goes idle
+
 **Command Execution:**
 1. Building/unit selected, CommandCard becomes visible
 2. CommandCard calls `get_command_options()` on selected entity

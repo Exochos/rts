@@ -146,12 +146,12 @@ func _process_moving(delta: float) -> void:
 func _process_gathering(delta: float) -> void:
 	# Check if resource node is still valid
 	if not is_instance_valid(target_node) or not target_node.has_method("is_gatherable"):
-		_change_state(State.IDLE)
+		_find_nearby_resource()
 		return
 
 	# Check if resource is depleted
 	if not target_node.is_gatherable():
-		_change_state(State.IDLE)
+		_find_nearby_resource()
 		return
 
 	# Face the resource node
@@ -325,6 +325,9 @@ func _return_resources() -> void:
 func _dropoff_resources() -> void:
 	print("Deposited %d %s" % [carried_resources, resource_type])
 
+	# Store the resource type before clearing inventory
+	var last_resource_type = resource_type
+
 	# TODO: Actually add resources to player's stockpile
 	# PlayerResources.add_resource(resource_type, carried_resources)
 
@@ -338,7 +341,9 @@ func _dropoff_resources() -> void:
 			nav_agent.target_position = target_node.global_position
 		_change_state(State.MOVING)
 	else:
-		_change_state(State.IDLE)
+		# Resource depleted, find another nearby resource
+		resource_type = last_resource_type  # Restore resource type for search
+		_find_nearby_resource()
 
 func _find_nearest_dropoff() -> void:
 	# Find townhall or similar dropoff point
@@ -352,6 +357,39 @@ func _find_nearest_dropoff() -> void:
 			if dist < nearest_dist:
 				nearest_dist = dist
 				dropoff_point = building
+
+func _find_nearby_resource() -> void:
+	# Search for nearby gatherable resources of the same type
+	var search_radius = 20.0  # Search within 20 units
+	var gatherable_nodes = get_tree().get_nodes_in_group("gatherable")
+	var nearest_resource = null
+	var nearest_dist = search_radius
+
+	var current_resource_type = resource_type if resource_type != "" else "Wood"
+
+	for node in gatherable_nodes:
+		if not is_instance_valid(node):
+			continue
+
+		# Skip the current depleted resource
+		if node == target_node:
+			continue
+
+		# Check if it's gatherable and has the same resource type
+		if node.has_method("is_gatherable") and node.is_gatherable():
+			if node.resource_name == current_resource_type:
+				var dist = global_position.distance_to(node.global_position)
+				if dist < nearest_dist:
+					nearest_dist = dist
+					nearest_resource = node
+
+	# If found a nearby resource, go gather it
+	if nearest_resource:
+		print("Found nearby %s resource, moving to it" % current_resource_type)
+		gather_from_resource(nearest_resource)
+	else:
+		print("No nearby %s resources found, going idle" % current_resource_type)
+		_change_state(State.IDLE)
 
 # ============================================================================
 # COMBAT SYSTEM

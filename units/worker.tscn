@@ -4,15 +4,18 @@
 [ext_resource type="PackedScene" uid="uid://bmosjy2nfkpcj" path="res://units/ranger.tscn" id="2_nip6m"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nip6m"]
+radius = 0.42236328
+height = 2.2580566
 
 [node name="Worker" type="CharacterBody3D" unique_id=1427411237 groups=["units"]]
 script = ExtResource("1_55o48")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=632006541]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.45763773, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.71466064, 0)
 shape = SubResource("CapsuleShape3D_nip6m")
 
 [node name="selection_area(Node3D)" type="Node3D" parent="." unique_id=449209634]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6821981, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=807370019]
 

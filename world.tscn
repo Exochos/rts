@@ -25,19 +25,19 @@ glow_enabled = true
 [sub_resource type="Theme" id="Theme_dwbse"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_dwbse"]
-vertices = PackedVector3Array(-49.5, 1.4981658, -49.5, -49.5, 1.4981658, 49.5, 49.5, 1.4981658, 49.5, 49.5, 1.4981658, -49.5)
+vertices = PackedVector3Array(-49.5, 0.84942985, -49.5, -49.5, 0.84942985, 49.5, 49.5, 0.84942985, 49.5, 49.5, 0.84942985, -49.5)
 polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_aqk2v"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dwbse"]
-size = Vector3(100, 2, 100)
+size = Vector3(100, 1, 100)
 
 [sub_resource type="BoxMesh" id="BoxMesh_dwbse"]
-size = Vector3(100, 2, 100)
+size = Vector3(100, 2.7, 100)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pkg7o"]
-albedo_color = Color(0, 0.64705884, 0.14509805, 0.30588236)
+albedo_color = Color(0, 0.3544466, 0.06169885, 1)
 
 [node name="World" type="Node3D" unique_id=412345574]
 
@@ -60,7 +60,7 @@ camera_zoom_max = 100.0
 [node name="camera_pivot" type="Node3D" parent="camera_base" unique_id=444278456]
 
 [node name="Camera3D" type="Camera3D" parent="camera_base/camera_pivot" unique_id=322767274]
-transform = Transform3D(-0.0053656315, 0.09176377, -0.10935624, 0.004497035, 0.109487794, 0.09165351, 0.1426855, 1.0650109e-09, -0.0070009516, -2.5844743, 0.6702441, 0)
+transform = Transform3D(-0.0050530946, 0.09887583, -0.10298645, 0.004845573, 0.10311034, 0.09875701, 0.1426855, 1.190557e-09, -0.0070009516, -2.5844743, 1.0493419, 0)
 fov = 108.02012
 
 [node name="ui" type="CanvasLayer" parent="." unique_id=1906225500]
@@ -118,10 +118,10 @@ script = ExtResource("6_dwbse")
 layout_mode = 0
 
 [node name="Worker" parent="." unique_id=1427411237 instance=ExtResource("4_dwbse")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.26580283, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=228041333]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.99816585, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 navigation_mesh = SubResource("NavigationMesh_dwbse")
 
 [node name="Ground" type="StaticBody3D" parent="NavigationRegion3D" unique_id=1576643139]
@@ -132,7 +132,7 @@ physics_material_override = SubResource("PhysicsMaterial_aqk2v")
 shape = SubResource("BoxShape3D_dwbse")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Ground" unique_id=615604610]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.398736, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 mesh = SubResource("BoxMesh_dwbse")
 surface_material_override/0 = SubResource("StandardMaterial3D_pkg7o")
 
