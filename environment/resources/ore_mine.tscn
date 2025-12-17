@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://ce7k5xscgbaep"]
+
+[ext_resource type="Script" uid="uid://nvunipkjjhy1" path="res://gatherable_resource.gd" id="1_resource"]
+[ext_resource type="PackedScene" uid="uid://bwg1skqgwsea2" path="res://environment/resources/Ore_Mine.glb" id="2_ore_model"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ore"]
+size = Vector3(3.298706, 2, 3)
+
+[node name="OreMine" type="StaticBody3D" unique_id=662858784 groups=["gatherable", "resource_mine"]]
+script = ExtResource("1_resource")
+resource_name = "Ore"
+amount = 500
+max_amount = 500
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1231523691]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6215235, 1, 0)
+shape = SubResource("BoxShape3D_ore")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=879806852]
+
+[node name="Ore_Mine" parent="MeshInstance3D" unique_id=1568724669 instance=ExtResource("2_ore_model")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, -4.130554)
+
+[node name="Label3D" type="Label3D" parent="." unique_id=2123061459]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3973457, 2.8845835, -0.07446754)
+pixel_size = 0.01
+billboard = 1
+text = "Ore Mine"

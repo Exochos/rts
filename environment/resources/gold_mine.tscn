@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dqaurd37be18s"]
+
+[ext_resource type="Script" uid="uid://nvunipkjjhy1" path="res://gatherable_resource.gd" id="1_resource"]
+[ext_resource type="PackedScene" uid="uid://b0bc3vg16ifqc" path="res://environment/resources/Mine.glb" id="2_mine_model"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mine"]
+size = Vector3(1.5379639, 2, 3.9322815)
+
+[node name="GoldMine" type="StaticBody3D" unique_id=1885423111 groups=["gatherable", "resource_mine"]]
+script = ExtResource("1_resource")
+amount = 500
+max_amount = 500
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1973899031]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.73101807, 1, -0.068374634)
+shape = SubResource("BoxShape3D_mine")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=176658533]
+
+[node name="Mine" parent="MeshInstance3D" unique_id=973147571 instance=ExtResource("2_mine_model")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, -4.6193233)
+
+[node name="Label3D" type="Label3D" parent="." unique_id=2090627656]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.839627, 2.8967106, 0)
+pixel_size = 0.01
+billboard = 1
+text = "Gold Mine
+"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://ciijmxethmta4"]
+[gd_scene format=3 uid="uid://ciijmxethmta4"]
 
 [ext_resource type="PackedScene" uid="uid://b6jbr7dxr8t03" path="res://assets/characters/Animation_Running_withSkin.fbx" id="1_0i0p4"]
 

@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://de0kf2m2c5g5y"]
+
+[ext_resource type="Script" uid="uid://nvunipkjjhy1" path="res://gatherable_resource.gd" id="1_resource"]
+[ext_resource type="PackedScene" uid="uid://dt1e1pftrpfhm" path="res://assets/buildings/decoration/nature/tree_single_A.gltf" id="2_tree_model"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_d2g23"]
+height = 5.510315
+radius = 0.74316406
+
+[node name="Tree" type="StaticBody3D" unique_id=780533274 groups=["gatherable", "resource_tree"]]
+script = ExtResource("1_resource")
+resource_name = "Wood"
+amount = 100
+max_amount = 100
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=187101895]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+shape = SubResource("CylinderShape3D_d2g23")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1778397351]
+
+[node name="TreeModel" parent="MeshInstance3D" unique_id=231021114 instance=ExtResource("2_tree_model")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 1.0799441, 0)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.0, 0)
+billboard = 1
+text = "Wood"

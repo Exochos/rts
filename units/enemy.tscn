@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://ca1rry630s2o1"]
+
+[ext_resource type="Script" uid="uid://c8jgdle4rxkrs" path="res://units/attacker.gd" id="1_attacker"]
+[ext_resource type="PackedScene" uid="uid://cyflflukhfie5" path="res://units/Barbarian.glb" id="2_barbarian"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_enemy"]
+radius = 0.4
+height = 1.8
+
+[node name="Enemy" type="CharacterBody3D" unique_id=836701418]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+script = ExtResource("1_attacker")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1513330814]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_enemy")
+
+[node name="Model" type="Node3D" parent="." unique_id=884527168]
+
+[node name="Barbarian" parent="Model" unique_id=785048829 instance=ExtResource("2_barbarian")]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1446219239]
+
+[node name="AggroArea" type="Area3D" parent="." unique_id=1797782931]

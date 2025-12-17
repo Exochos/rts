@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://spawner001"]
+
+[ext_resource type="Script" path="res://buildings/enemy_spawner.gd" id="1_spawner"]
+[ext_resource type="PackedScene" path="res://assets/buildings/buildings/red/building_barracks_red.gltf" id="2_barracks"]
+
+[node name="EnemySpawner" type="Node3D"]
+script = ExtResource("1_spawner")
+spawn_interval = 5.0
+max_active_enemies = 10
+spawn_on_start = true
+use_rally_point = false
+auto_find_rally_point = false
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="Barracks" parent="Model" instance=ExtResource("2_barracks")]
+
+[node name="SpawnPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
