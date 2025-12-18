@@ -23,6 +23,10 @@ config/icon="res://icon.svg"
 
 ResourceManager="*res://resource_manager.gd"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/terrain_3d/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg")
+
 [filesystem]
 
 import/blender/enabled=false

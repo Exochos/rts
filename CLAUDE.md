@@ -19,7 +19,7 @@ To run the game:
 
 ### Core Systems
 
-**RTS Controller** (`rts_controller.gd`)
+**RTS Controller** (`core/rts_controller.gd`)
 - Central input handler attached to the World scene
 - Manages unit/building selection via box selection and single-click
 - Handles right-click commands for movement
@@ -27,7 +27,7 @@ To run the game:
 - Uses Godot groups: `"units"` and `"buildings"` to identify selectable objects
 - Updates the CommandCard UI when selection changes
 
-**Camera System** (`RTS_Camera_.gd`)
+**Camera System** (`camera/RTS_Camera_.gd`)
 - WASD movement controls
 - Mouse wheel zoom (adjusts FOV, not position)
 - Middle-mouse drag for orbital rotation
@@ -76,7 +76,7 @@ To run the game:
 
 ### UI Systems
 
-**Command Card** (`command_card.gd`)
+**Command Card** (`ui/command_card.gd`)
 - Bottom-right UI panel that displays commands for selected units/buildings
 - Only visible when exactly one unit/building is selected
 - Dynamically creates buttons from `get_command_options()` return value
@@ -142,6 +142,9 @@ Main scene: `world.tscn`
 
 ### Asset Organization
 
+- `core/` - Core game systems (RTS controller, game state management)
+- `camera/` - Camera controller scripts
+- `ui/` - UI components (command card, resource counter, menus, FPS display)
 - `assets/characters/` - Character models and animations
 - `assets/characters/animations/extracted_animations/` - Extracted animation resources (.res files)
 - `assets/buildings/` - Building models and decorations
@@ -149,6 +152,7 @@ Main scene: `world.tscn`
 - `materials/` - Material resources including selection outline
 - `units/` - Unit scenes and scripts
 - `town/` - Building scenes and scripts
+- `environment/` - Environment objects like trees, rocks, and resource nodes
 
 ## Development Notes
 

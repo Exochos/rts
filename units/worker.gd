@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends RigidBody3D
 ## Worker unit for RTS gameplay
 ##
 ## This script handles all worker behaviors including movement, resource gathering,
@@ -118,8 +118,7 @@ func _physics_process(delta: float) -> void:
 
 func _process_idle(_delta: float) -> void:
 	# Worker is idle, no movement
-	velocity = Vector3.ZERO
-	move_and_slide()
+	linear_velocity = Vector3.ZERO
 
 func _process_moving(delta: float) -> void:
 	if not nav_agent:
@@ -137,8 +136,7 @@ func _process_moving(delta: float) -> void:
 	var direction = (next_position - global_position).normalized()
 
 	# Move toward next position
-	velocity = direction * move_speed
-	move_and_slide()
+	linear_velocity = direction * move_speed
 
 	# Rotate to face movement direction
 	_rotate_toward(direction, delta)
@@ -187,8 +185,7 @@ func _process_returning(delta: float) -> void:
 	if nav_agent:
 		var next_position = nav_agent.get_next_path_position()
 		var direction = (next_position - global_position).normalized()
-		velocity = direction * move_speed
-		move_and_slide()
+		linear_velocity = direction * move_speed
 		_rotate_toward(direction, delta)
 	else:
 		_simple_move_to_target(delta)
@@ -204,8 +201,7 @@ func _process_building(delta: float) -> void:
 	_rotate_toward(direction, delta)
 
 	# Placeholder: Building progress would go here
-	velocity = Vector3.ZERO
-	move_and_slide()
+	linear_velocity = Vector3.ZERO
 
 func _process_attacking(delta: float) -> void:
 	# Check if target is still valid
@@ -218,13 +214,11 @@ func _process_attacking(delta: float) -> void:
 	# If target is out of range, move closer
 	if distance_to_target > attack_range:
 		var direction = (target_node.global_position - global_position).normalized()
-		velocity = direction * move_speed
-		move_and_slide()
+		linear_velocity = direction * move_speed
 		_rotate_toward(direction, delta)
 	else:
 		# In range, stop and attack
-		velocity = Vector3.ZERO
-		move_and_slide()
+		linear_velocity = Vector3.ZERO
 
 		# Face target
 		var direction = (target_node.global_position - global_position).normalized()
@@ -238,7 +232,7 @@ func _process_attacking(delta: float) -> void:
 
 # ============================================================================
 # RTS CONTROLLER INTERFACE
-# These methods are called by the rts_controller.gd
+# These methods are called by the core/rts_controller.gd
 # ============================================================================
 
 ## Called by RTS controller when right-clicking on terrain
@@ -412,8 +406,7 @@ func _perform_attack() -> void:
 func _simple_move_to_target(delta: float) -> void:
 	# Fallback movement without NavigationAgent
 	var direction = (target_position - global_position).normalized()
-	velocity = direction * move_speed
-	move_and_slide()
+	linear_velocity = direction * move_speed
 	_rotate_toward(direction, delta)
 
 	# Check if arrived
@@ -427,7 +420,7 @@ func _rotate_toward(direction: Vector3, delta: float) -> void:
 
 func _arrive_at_destination() -> void:
 	# We've arrived at target position
-	velocity = Vector3.ZERO
+	linear_velocity = Vector3.ZERO
 
 	# Determine what to do based on target_node
 	if is_instance_valid(target_node):

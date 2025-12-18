@@ -1,0 +1,172 @@
+[gd_scene format=3 uid="uid://x34e4v60vdmy"]
+
+[ext_resource type="Script" uid="uid://chstoagn42gbr" path="res://demo/src/DemoScene.gd" id="1_po4vw"]
+[ext_resource type="PackedScene" uid="uid://bb2lp50sjndus" path="res://demo/components/Environment.tscn" id="2_i74wg"]
+[ext_resource type="PackedScene" uid="uid://dwnhqfjq7v1pq" path="res://demo/components/Borders.tscn" id="3_3upu0"]
+[ext_resource type="PackedScene" uid="uid://domhm87hbhbg1" path="res://demo/components/Player.tscn" id="4_fk3ul"]
+[ext_resource type="PackedScene" uid="uid://djhl3foqkj4e2" path="res://demo/components/Tunnel.tscn" id="5_2lvlr"]
+[ext_resource type="PackedScene" uid="uid://d2jihfohphuue" path="res://demo/components/UI.tscn" id="5_rc7e2"]
+[ext_resource type="NavigationMesh" uid="uid://yf3fu23666k8" path="res://demo/data/nav_mesh.res" id="8_6jfdr"]
+[ext_resource type="PackedScene" uid="uid://dta81wmmyxly0" path="res://town/townhall.tscn" id="10_is7y6"]
+[ext_resource type="Terrain3DAssets" uid="uid://dal3jhw6241qg" path="res://demo/data/assets.tres" id="10_qmhh8"]
+[ext_resource type="PackedScene" uid="uid://cxhgf1djisotx" path="res://units/worker.tscn" id="11_dgpao"]
+[ext_resource type="PackedScene" uid="uid://di5fovhcyd7re" path="res://demo/components/Enemy.tscn" id="12_b2xl8"]
+[ext_resource type="PackedScene" uid="uid://dqaurd37be18s" path="res://environment/resources/gold_mine.tscn" id="12_ssqys"]
+[ext_resource type="PackedScene" uid="uid://ce7k5xscgbaep" path="res://environment/resources/ore_mine.tscn" id="13_ub8xt"]
+[ext_resource type="PackedScene" uid="uid://de0kf2m2c5g5y" path="res://environment/resources/tree.tscn" id="14_e4kas"]
+
+[sub_resource type="Gradient" id="Gradient_vr1m7"]
+offsets = PackedFloat32Array(0.2, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d8lcj"]
+noise_type = 2
+frequency = 0.03
+cellular_jitter = 3.0
+cellular_return_type = 0
+domain_warp_enabled = true
+domain_warp_type = 1
+domain_warp_amplitude = 50.0
+domain_warp_fractal_type = 2
+domain_warp_fractal_lacunarity = 1.5
+domain_warp_fractal_gain = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bov7h"]
+noise = SubResource("FastNoiseLite_d8lcj")
+color_ramp = SubResource("Gradient_vr1m7")
+seamless = true
+
+[sub_resource type="Terrain3DMaterial" id="Terrain3DMaterial_s5mq5"]
+_shader_parameters = {
+"_mouse_layer": 2147483648,
+"auto_base_texture": 0,
+"auto_height_reduction": 0.1,
+"auto_overlay_texture": 1,
+"auto_slope": 1.0,
+"bias_distance": 512.0,
+"blend_sharpness": 0.7050000334875,
+"depth_blur": 0.0,
+"dual_scale_far": 170.0,
+"dual_scale_near": 100.0,
+"dual_scale_reduction": 0.3,
+"dual_scale_texture": 0,
+"enable_macro_variation": true,
+"enable_projection": true,
+&"flat_terrain_normals": true,
+"macro_variation1": Color(0.878431, 0.862745, 0.901961, 1),
+"macro_variation2": Color(0.898039, 0.898039, 0.803922, 1),
+"macro_variation_slope": 0.333,
+"mipmap_bias": 1.0,
+"noise1_angle": 0.1,
+"noise1_offset": Vector2(0.5, 0.5),
+"noise1_scale": 0.04,
+"noise2_scale": 0.1150000054625,
+"noise_texture": SubResource("NoiseTexture2D_bov7h"),
+"projection_threshold": 0.8,
+"tri_scale_reduction": 0.3
+}
+world_background = 0
+auto_shader = true
+dual_scaling = true
+show_region_grid = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_is7y6"]
+
+[node name="Demo" type="Node" unique_id=1971909123]
+script = ExtResource("1_po4vw")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1516761783]
+transform = Transform3D(-0.83867055, 0.25317115, -0.48221996, 0, 0.8853937, 0.46484205, 0.54463905, 0.3898494, -0.7425536, 91.61556, 210.69052, -1969.1061)
+light_color = Color(1.5910738, 1.6713666, 0.36220506, 1)
+light_energy = 0.495
+light_indirect_energy = 1.235
+light_volumetric_fog_energy = 1.475
+shadow_enabled = true
+
+[node name="UI" parent="." unique_id=2000468199 instance=ExtResource("5_rc7e2")]
+
+[node name="Environment" parent="." unique_id=667269069 instance=ExtResource("2_i74wg")]
+
+[node name="Borders" parent="." unique_id=462730323 instance=ExtResource("3_3upu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 512, -2.5, 512)
+
+[node name="Tunnel" parent="." unique_id=191425353 instance=ExtResource("5_2lvlr")]
+
+[node name="Player" parent="." unique_id=1879712484 instance=ExtResource("4_fk3ul")]
+transform = Transform3D(0.0774673, 0, -0.996995, 0, 1, 0, 0.996995, 0, 0.0774673, 229.418, 104.956, -1838.16)
+
+[node name="Enemy" parent="." unique_id=800495116 node_paths=PackedStringArray("target") instance=ExtResource("12_b2xl8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 358.95657, 81.26834, -1031.448)
+MOVE_SPEED = 2.0
+target = NodePath("../Player")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=945226387]
+navigation_mesh = ExtResource("8_6jfdr")
+
+[node name="Terrain3D" type="Terrain3D" parent="NavigationRegion3D" unique_id=241526543]
+data_directory = "res://demo/data"
+material = SubResource("Terrain3DMaterial_s5mq5")
+assets = ExtResource("10_qmhh8")
+show_grid = true
+collision_mode = 4
+collision_mask = 3
+mesh_size = 64
+show_region_grid = true
+top_level = true
+metadata/_edit_lock_ = true
+
+[node name="Camera3D" type="Camera3D" parent="NavigationRegion3D" unique_id=1418081151]
+transform = Transform3D(-0.03550771, 0.8189698, -0.572737, 0.0130129205, 0.5734287, 0.8191521, 0.9992846, 0.021633234, -0.031018328, 90.75659, 82.75711, -1969.1061)
+fov = 60.0
+near = 0.132
+
+[node name="Townhall" parent="NavigationRegion3D" unique_id=1463969635 instance=ExtResource("10_is7y6")]
+transform = Transform3D(0.1019465, 0, 2.1976366, 0, 2.2, 0, -2.1976366, 0, 0.1019465, 66.76262, 79.88638, -1847.791)
+
+[node name="Worker" parent="NavigationRegion3D" unique_id=1427411237 instance=ExtResource("11_dgpao")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 93.341064, 83.53591, -1847.6152)
+mass = 200.0
+physics_material_override = SubResource("PhysicsMaterial_is7y6")
+
+[node name="GoldMine" parent="NavigationRegion3D" unique_id=1885423111 instance=ExtResource("12_ssqys")]
+transform = Transform3D(-0.79960066, 0, 0.6005318, 0, 1, 0, -0.6005318, 0, -0.79960066, 116.29918, 80.7294, -1735.0248)
+
+[node name="GoldMine2" parent="NavigationRegion3D" unique_id=1015669761 instance=ExtResource("12_ssqys")]
+transform = Transform3D(-0.7996007, 0, 0.6005318, 0, 1, 0, -0.6005318, 0, -0.7996007, 171.02939, 80.7294, -1863.2982)
+
+[node name="OreMine" parent="NavigationRegion3D" unique_id=662858784 instance=ExtResource("13_ub8xt")]
+transform = Transform3D(0.6647481, 0, 0.74706763, 0, 1, 0, -0.74706763, 0, 0.6647481, 92.65112, 80.93067, -1756.1161)
+amount = 5000
+max_amount = 5000
+
+[node name="OreMine2" parent="NavigationRegion3D" unique_id=139421736 instance=ExtResource("13_ub8xt")]
+transform = Transform3D(0.41968977, 0, -0.90766764, 0, 1, 0, 0.90766764, 0, 0.41968977, 11.310669, 80.93067, -1877.1053)
+amount = 5000
+max_amount = 5000
+
+[node name="Tree" parent="NavigationRegion3D" unique_id=780533274 instance=ExtResource("14_e4kas")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 103.48218, 79.87186, -1831.881)
+
+[node name="Tree2" parent="NavigationRegion3D" unique_id=324448599 instance=ExtResource("14_e4kas")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 100.70678, 79.66012, -1879.6422)
+
+[node name="Tree3" parent="NavigationRegion3D" unique_id=1984481608 instance=ExtResource("14_e4kas")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 100.70678, 80.446884, -1840.4185)
+
+[node name="Tree4" parent="NavigationRegion3D" unique_id=2018678614 instance=ExtResource("14_e4kas")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 100.70678, 80.446884, -1838.688)
+
+[node name="Tree5" parent="NavigationRegion3D" unique_id=1872546128 instance=ExtResource("14_e4kas")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 102.52425, 80.446884, -1841.5651)
+
+[node name="Tree6" parent="NavigationRegion3D" unique_id=1109471994 instance=ExtResource("14_e4kas")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 102.52425, 80.446884, -1842.9227)
+
+[node name="Tree7" parent="NavigationRegion3D" unique_id=1002242188 instance=ExtResource("14_e4kas")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 102.52425, 80.446884, -1840.4185)
+
+[node name="Tree8" parent="NavigationRegion3D" unique_id=533847553 instance=ExtResource("14_e4kas")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 102.52425, 80.446884, -1838.688)
+
+[node name="Tree9" parent="NavigationRegion3D" unique_id=449093095 instance=ExtResource("14_e4kas")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 104.44461, 78.203354, -2010.5275)

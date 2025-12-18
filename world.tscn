@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://bmwy45ibgeaom"]
 
-[ext_resource type="Script" uid="uid://cc6bd8hfflaq3" path="res://RTS_Camera_.gd" id="1_f3sb7"]
-[ext_resource type="Script" uid="uid://0n8iu6as82mg" path="res://rts_controller.gd" id="2_fj7yv"]
+[ext_resource type="Script" uid="uid://bt1tfnq822paf" path="res://camera/RTS_Camera_.gd" id="1_f3sb7"]
+[ext_resource type="Script" uid="uid://b87670oede3kr" path="res://core/rts_controller.gd" id="2_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://dta81wmmyxly0" path="res://town/townhall.tscn" id="3_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://cxhgf1djisotx" path="res://units/worker.tscn" id="4_dwbse"]
-[ext_resource type="Script" uid="uid://b22rxnqvom5pu" path="res://command_card.gd" id="5_036b0"]
-[ext_resource type="Script" uid="uid://hqu3gg4awaov" path="res://control.gd" id="6_dwbse"]
+[ext_resource type="Script" uid="uid://bo37uitbyrbam" path="res://ui/command_card.gd" id="5_036b0"]
+[ext_resource type="Script" uid="uid://y6xrsdbcps4j" path="res://ui/control.gd" id="6_dwbse"]
 [ext_resource type="PackedScene" uid="uid://de0kf2m2c5g5y" path="res://environment/resources/tree.tscn" id="7_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://c2qx8hxjko7aq" path="res://ui/resource_counter.tscn" id="8_resource_counter"]
 [ext_resource type="PackedScene" uid="uid://dqaurd37be18s" path="res://environment/resources/gold_mine.tscn" id="10_wse8f"]
@@ -57,7 +57,7 @@ environment = SubResource("Environment_fj7yv")
 [node name="floor" type="MeshInstance3D" parent="." unique_id=395157246]
 
 [node name="camera_base" type="Node3D" parent="." unique_id=1067221151]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 59.159306)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 117.564575)
 script = ExtResource("1_f3sb7")
 camera_move_speed = 32.0
 camera_zoom_max = 100.0
@@ -65,7 +65,7 @@ camera_zoom_max = 100.0
 [node name="camera_pivot" type="Node3D" parent="camera_base" unique_id=444278456]
 
 [node name="Camera3D" type="Camera3D" parent="camera_base/camera_pivot" unique_id=322767274]
-transform = Transform3D(-0.0050725318, 0.11699568, -0.08181959, 0.0018589888, 0.0819184, 0.117021725, 0.14275496, 0.0030904629, -0.0044311914, -2.5844743, 1.1269878, 0)
+transform = Transform3D(-0.00507253, 0.11699569, -0.08181957, 0.0018589884, 0.08191839, 0.11702174, 0.14275494, 0.0030904624, -0.00443119, -2.5844743, 1.1269878, 0)
 fov = 60.0
 near = 0.132
 
@@ -87,7 +87,7 @@ offset_bottom = 159.0
 script = ExtResource("2_fj7yv")
 
 [node name="Townhall" parent="." unique_id=405179301 instance=ExtResource("3_tlwt5")]
-transform = Transform3D(-0.99869984, 0, -0.05097644, 0, 1, 0, 0.05097644, 0, -0.99869984, 3.5375419, -1.1561226, 121.315094)
+transform = Transform3D(-0.9986998, 0, -0.050976492, 0, 1, 0, 0.050976492, 0, -0.9986998, 3.5375419, -1.1561226, 121.315094)
 
 [node name="CommandCard" type="Control" parent="." unique_id=1489285819]
 custom_minimum_size = Vector2(400, 200)
@@ -128,6 +128,7 @@ layout_mode = 0
 
 [node name="Worker" parent="." unique_id=1427411237 instance=ExtResource("4_dwbse")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7097617, 120.94276)
+mass = 300.0
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=228041333]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
@@ -138,6 +139,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0018341541, 0)
 physics_material_override = SubResource("PhysicsMaterial_aqk2v")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Ground" unique_id=1254900958]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("BoxShape3D_dwbse")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Ground" unique_id=615604610]
@@ -145,7 +147,7 @@ mesh = SubResource("BoxMesh_dwbse")
 surface_material_override/0 = SubResource("StandardMaterial3D_pkg7o")
 
 [node name="GoldMine" parent="." unique_id=968993674 instance=ExtResource("10_wse8f")]
-transform = Transform3D(-0.7996008, 0, 0.6005319, 0, 1, 0, -0.6005319, 0, -0.7996008, 22.958117, -0.9007205, 138.16133)
+transform = Transform3D(-0.7996007, 0, 0.6005318, 0, 1, 0, -0.6005318, 0, -0.7996007, 22.958117, -0.9007205, 138.16133)
 
 [node name="GoldMine2" parent="." unique_id=1885423111 instance=ExtResource("10_wse8f")]
 transform = Transform3D(-0.7996008, 0, 0.6005319, 0, 1, 0, -0.6005319, 0, -0.7996008, 77.68832, -0.9007205, 105.80788)
